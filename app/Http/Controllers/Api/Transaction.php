@@ -30,20 +30,22 @@ class Transaction extends Controller
         // $User = Auth::User();
         $Balance = new Balance();
         $Transaction = new EntitiesTransaction();
-        $findBalance = $Balance->find($request->user_id);
+        $findBalance = $Balance->findBalanceWithUser($request->user_id);
         if(empty($findBalance)){
-            $this->message='ops, balance not found';
+            $this->message='Empty balance';
             $this->code=404;
             return $this->responseBase();
         }
-        if($findBalance->amount_available<$request->input){
+
+        // dd($findBalance->amount_available,$request->amount);
+        if($findBalance->amount_available<$request->amount){
             $this->message='Insufficient balance';
             return $this->responseBase();
         }
 
         $findTrx = $Transaction->checkTrxId($request->trx_id);
         if(!empty($findTrx)){
-            $this->message='Trxid exist! please use another trx_id.';
+            $this->message='Trxid exist! please using another trx_id.';
             return $this->responseBase();
         }
 
@@ -58,7 +60,7 @@ class Transaction extends Controller
             $inputTransaction = $Transaction->createNew($transactionInsert);
     
             $balanceArray = [
-                'amount_available'=>$findBalance->amount_available-$request->input
+                'amount_available'=>$findBalance->amount_available-$request->amount
             ];
     
             $updateBalance= $Balance->updateBalance($findBalance,$balanceArray);
@@ -70,7 +72,7 @@ class Transaction extends Controller
                 'balance'=>bcdiv($updateBalance->amount_available, 1, 6)
             ];
             DB::commit();
-            sleep(30); // sleep 30 second ?
+            // sleep(30); // sleep 30 second ?
             return $this->responseBase();
         } catch (\Exception $th) {
             // throw $th;

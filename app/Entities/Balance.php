@@ -28,7 +28,7 @@ class Balance extends Model
     }
 
     function findBalanceWithUser($user_id){
-        return Balance::where('user_id',$user_id)->find();
+        return Balance::where('user_id',$user_id)->first();
     }
 
     function updateBalance($find, $update){
