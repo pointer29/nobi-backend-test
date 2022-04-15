@@ -34,6 +34,24 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime','api_token'
     ];
+
+    function getUserByEmail($email){
+        $data=User::where('email', $email)->first();
+        return $data;
+    }
+
+    function create_user($name,$email,$password){
+        $register = User::create([
+            'name'=>$name,
+            'email'=>$email,
+            'password'=>$password
+        ]);
+    }
+
+    function updateUserToken($user,$apiToken){
+        $user->api_token=$apiToken;
+        $user->save();
+    }
 }
