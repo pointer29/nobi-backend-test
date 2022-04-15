@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "3119c02b-ea8d-4c6a-bdb8-c7a0de056a61",
+		"name": "nobi-backendtest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test1",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "satyasunarya@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "satya",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "satyasunarya@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test2",
+			"item": [
+				{
+					"name": "Quote",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/quote",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"quote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test3",
+			"item": [
+				{
+					"name": "transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5f82989bffdc050b4f50bd2adf3ea4580f8df5a3da3e72440aa259fb52e663e7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ed448494a43b9527809199f2c7bb6f1045f694707d2b1c099858c3861380cda5",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "form",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "0.00000002",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "trx_id",
+									"value": "811112",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/transaction",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test4",
+			"item": [
+				{
+					"name": "upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5f82989bffdc050b4f50bd2adf3ea4580f8df5a3da3e72440aa259fb52e663e7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/satya/Documents/schedule_coin_price_history.csv/test - Copy.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/price/upload",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test5",
+			"item": [
+				{
+					"name": "low-high",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5f82989bffdc050b4f50bd2adf3ea4580f8df5a3da3e72440aa259fb52e663e7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "week",
+									"value": "32",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2017",
+									"type": "text"
+								},
+								{
+									"key": "ticker",
+									"value": "BTC",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "usd",
+									"description": "idr,usd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/price/low-high",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"low-high"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5f82989bffdc050b4f50bd2adf3ea4580f8df5a3da3e72440aa259fb52e663e7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "starttime",
+									"value": "2017-08-10 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "endtime",
+									"value": "2017-08-10 00:00:00",
+									"type": "text"
+								},
+								{
+									"key": "ticker",
+									"value": "BTC",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "idr",
+									"description": "idr,usd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://nobi-backendtest.teste/api/v1/price/history",
+							"protocol": "http",
+							"host": [
+								"nobi-backendtest",
+								"teste"
+							],
+							"path": [
+								"api",
+								"v1",
+								"price",
+								"history"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
