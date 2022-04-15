@@ -42,12 +42,11 @@ class User extends Authenticatable
         return $data;
     }
 
-    function create_user($name,$email,$password){
-        $register = User::create([
-            'name'=>$name,
-            'email'=>$email,
-            'password'=>$password
-        ]);
+    function createNew($data){
+        $save = User::newInstance($data);
+        if($save->save()){
+            return $save;
+        }
     }
 
     function updateUserToken($user,$apiToken){

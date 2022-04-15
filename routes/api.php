@@ -17,15 +17,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login',[
-    'uses'=>'Auth\AuthBasic@login',
-]);
+Route::group(['as'=>'task1.','prefix'=>'task1'], function(){
 
-Route::post('/register',[
-    'uses'=>'Auth\AuthBasic@register',
-]);
+    Route::post('/login',[
+        'uses'=>'Auth\AuthBasic@login',
+    ]);
 
-Route::group(['as'=>'random.','prefix'=>'random'], function(){
+    Route::post('/register',[
+        'uses'=>'Auth\AuthBasic@register',
+    ]);
+
+});
+
+Route::group(['as'=>'task2.','prefix'=>'task2'], function(){
 
     route::get('/chuck',[
         'uses' => 'Api\Random@chuck',
@@ -40,6 +44,15 @@ Route::group(['as'=>'random.','prefix'=>'random'], function(){
     route::get('/cat',[
         'uses' => 'Api\Random@cat',
         'as' => 'cat',
+    ]);
+    
+});
+
+Route::group(['middleware'=>'auth:api','as'=>'task3.','prefix'=>'task3'], function(){
+
+    route::post('/transaction',[
+        'uses' => 'Api\Transaction@transaction',
+        'as' => 'transaction',
     ]);
     
 });
