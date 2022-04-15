@@ -21,6 +21,10 @@ class Random extends Controller
         ],$this->code);
     }
 
+    function quote(){
+        return $this->chuck();
+    }
+
     function chuck(){
         try {
             $this->url='https://api.chucknorris.io/jokes/random';

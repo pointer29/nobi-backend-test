@@ -17,42 +17,55 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['as'=>'task1.','prefix'=>'task1'], function(){
+Route::group(['prefix'=>'v1'], function(){
 
-    Route::post('/login',[
-        'uses'=>'Auth\AuthBasic@login',
-    ]);
+    Route::group(['as'=>'auth.','prefix'=>'auth'], function(){
 
-    Route::post('/register',[
-        'uses'=>'Auth\AuthBasic@register',
-    ]);
+        Route::post('/login',[
+            'uses'=>'Auth\AuthBasic@login',
+        ]);
 
-});
+        Route::post('/register',[
+            'uses'=>'Auth\AuthBasic@register',
+        ]);
 
-Route::group(['as'=>'task2.','prefix'=>'task2'], function(){
+    });
 
-    route::get('/chuck',[
-        'uses' => 'Api\Random@chuck',
-        'as' => 'chuck',
-    ]);
+    Route::group(['as'=>'quote.','prefix'=>'quote'], function(){
 
-    route::get('/dog',[
-        'uses' => 'Api\Random@dog',
-        'as' => 'dog',
-    ]);
+        route::get('/',[
+            'uses' => 'Api\Random@quote',
+            'as' => 'chuck',
+        ]);
+        
+    });
 
-    route::get('/cat',[
-        'uses' => 'Api\Random@cat',
-        'as' => 'cat',
-    ]);
-    
-});
+    Route::group(['middleware'=>'auth:api','as'=>'transaction.','prefix'=>'transaction'], function(){
 
-Route::group(['middleware'=>'auth:api','as'=>'task3.','prefix'=>'task3'], function(){
+        route::post('/',[
+            'uses' => 'Api\Transaction@transaction',
+            'as' => 'transaction',
+        ]);
+        
+    });
 
-    route::post('/transaction',[
-        'uses' => 'Api\Transaction@transaction',
-        'as' => 'transaction',
-    ]);
-    
+    Route::group(['middleware'=>'auth:api','as'=>'price.','prefix'=>'price'], function(){
+
+        route::post('/upload',[
+            'uses' => 'Api\History@upload',
+            'as' => 'upload',
+        ]);
+
+        route::post('/low-high',[
+            'uses' => 'Api\History@lowhigh',
+            'as' => 'lowhigh',
+        ]);
+
+        route::post('/history',[
+            'uses' => 'Api\History@history',
+            'as' => 'history',
+        ]);
+        
+    });
+
 });

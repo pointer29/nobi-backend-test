@@ -27,4 +27,8 @@ class Transaction extends Model
             return $save;
         }
     }
+
+    function checkTrxId($trx_id){
+        return Transaction::where('trx_id',$trx_id)->first();
+    }
 }

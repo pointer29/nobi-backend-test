@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Transaction extends FormRequest
+class History extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class Transaction extends FormRequest
     public function rules()
     {
         return [
-            'trx_id' =>['required'],
-            'user_id'=>['required'],
-            'amount' => ['required', 'numeric', 'min:0.00000002','max:9999999'],
+            'starttime'=> 'required|date',
+            'endtime'=>'required|date',
+            'ticker'=>'required|',
+            'currency'=>'required|',
         ];
     }
 }

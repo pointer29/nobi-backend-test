@@ -27,10 +27,10 @@ class Transaction extends Controller
     }
 
     function transaction(RequestsTransaction $request){
-        $User = Auth::User();
+        // $User = Auth::User();
         $Balance = new Balance();
         $Transaction = new EntitiesTransaction();
-        $findBalance = $Balance->find($User->id);
+        $findBalance = $Balance->find($request->user_id);
         if(empty($findBalance)){
             $this->message='ops, balance not found';
             $this->code=404;
@@ -41,17 +41,21 @@ class Transaction extends Controller
             return $this->responseBase();
         }
 
+        $findTrx = $Transaction->checkTrxId($request->trx_id);
+        if(!empty($findTrx)){
+            $this->message='Trxid exist! please use another trx_id.';
+            return $this->responseBase();
+        }
+
         try {
             DB::beginTransaction();
             $transactionInsert = [
-                'trx_id'=> Str::uuid()->toString(),
-                'user_id'=> $User->id,
-                'amount'=> $request->input
+                'trx_id'=> $request->trx_id,
+                'user_id'=> $request->user_id,
+                'amount'=> $request->amount
             ];
     
             $inputTransaction = $Transaction->createNew($transactionInsert);
-    
-            // tidak perlu pengecekan trx id karena di database sudah unique
     
             $balanceArray = [
                 'amount_available'=>$findBalance->amount_available-$request->input
@@ -69,7 +73,7 @@ class Transaction extends Controller
             sleep(30); // sleep 30 second ?
             return $this->responseBase();
         } catch (\Exception $th) {
-            //throw $th;
+            // throw $th;
             DB::rollback();
             $this->code=500;
             $this->message = 'Opps, error!!';
