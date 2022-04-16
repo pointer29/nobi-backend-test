@@ -5,6 +5,8 @@
 - Minimum versi php 7.4
 - Laravel yang digunakan v6
 - MySql yang digunakan 5.7.33
+- Penggunaan token pada task 3,4,5 dengan bearer token dengan Authorization type : Bearer token, atau dengan header Authorization : Bearer <api_token>
+- <api_token> didapat dari hasil login
 - Karena ada fitur upload csv, maka dibutuhkan beberapa config di php.ini
 
 ## settingan php.ini : 
